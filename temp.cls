@@ -94,6 +94,18 @@
         \end{minipage}        
  }
 
+ \newcommand{\ADDITIONALINFORMATION}[5]{     
+    	\begin{minipage}{0.08\linewidth}
+		\end{minipage}%                    
+        \begin{minipage}{0.84\linewidth}  
+    	\noindent {\color{subheadings}\bfseries\uppercase {#1}} 
+        \hfill {\color{headings}\fontsize{10pt}{12pt}#2}
+		\par   	
+        \noindent\hangindent=2em\hangafter=0 \small #4 % Description
+		\normalsize \par         
+        \end{minipage}        
+ }
+
 \newcommand{\software}[2][1.4em]{%
 	\raisebox{-0.2\height}{\includegraphics[height=#1, keepaspectratio]{#2}}%
 }
