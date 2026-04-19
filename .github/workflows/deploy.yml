@@ -1,7 +1,6 @@
 name: Deploy LaTeX Site
 on: [push]
 
-# Grant permissions for GitHub Pages deployment
 permissions:
   contents: read
   pages: write
@@ -17,10 +16,11 @@ jobs:
       - name: Compile LaTeX
         uses: xu-cheng/latex-action@v3
         with:
-          root_file: main.tex  # Change this if your file isn't main.tex
+          root_file: main.tex  # Ensure this matches your filename!
+          # Using 'latexmk' is standard and reliable
+          args: "-pdf -interaction=nonstopmode"
 
       - name: Create Web Redirect
-        # This creates a small HTML file that tells browsers to open your PDF immediately
         run: echo '<meta http-equiv="refresh" content="0; url=main.pdf">' > index.html
 
       - name: Upload Website Files
