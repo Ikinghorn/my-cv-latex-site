@@ -6,7 +6,7 @@
 }
 \ProcessOptions\relax
 \LoadClass{scrartcl}
-
+\usepackage{ifthen}
 \usepackage[english]{babel}
 \usepackage[utf8x]{inputenc}
 \usepackage[default,scale=0.95]{opensans}
@@ -54,7 +54,7 @@
 		\par \normalsize \normalfont}
 
 
-\newcommand{\NewPart}[1]{\section*{ \color{headings} \uppercase{#1}}}
+\newcommand{\NewPart}[1]{\addsec{\color{headings} \uppercase{#1}}}
 
 \newcommand{\PersonalEntry}[2]{
 		\noindent\hangindent=2em\hangafter=0 % Indentation
@@ -70,21 +70,19 @@
         
         
 \newcommand{\workEntry}[5]{		     
-    	\begin{minipage}{0.08\linewidth}
- 		\includegraphics[width=1.2cm] {#5}
-		\end{minipage}%                 
-        \begin{minipage}{0.84\linewidth}  
-    	\noindent {\color{subheadings}\bfseries\uppercase {#1}}, {\color{subheadings}\textit{#3}}  
-        \hfill  {\color{headings}\fontsize{10pt}{12pt}#2}   
-        \par   	
-        \noindent\hangindent=2em\hangafter=0 \small #4 % Description
-		\normalsize \par         
-        \end{minipage}         
+    \begin{minipage}{0.08\linewidth}
+    \end{minipage}%                 
+    \begin{minipage}{0.84\linewidth}  
+    \noindent {\color{subheadings}\bfseries\uppercase {#1}}, {\color{subheadings}\textit{#3}}  
+    \hfill  {\color{headings}\fontsize{10pt}{12pt}#2}   
+    \par   	
+    \noindent\hangindent=2em\hangafter=0 \small #4
+    \normalsize \par         
+    \end{minipage}         
 }
         
 \newcommand{\EducationEntry}[5]{     
     	\begin{minipage}{0.08\linewidth}
- 		\includegraphics[width=1.2cm] {#5}
 		\end{minipage}%                    
         \begin{minipage}{0.84\linewidth}  
     	\noindent {\color{subheadings}\bfseries\uppercase {#1}} 
