@@ -1,5 +1,6 @@
 \documentclass[paper=a4,fontsize=11pt]{temp} 
 \usepackage{graphicx}
+\usepackage{pdfpages}
 % KOMA-article class		
 \usepackage{ifthen}
 \begin{document}
@@ -95,7 +96,7 @@ Currently preparing for the AWS Certified Solutions Architect – Associate, Ter
 \sepspace
 \NewPart{Additional Information}{}
 \ADDITIONALINFORMATION{Pastimes and Personal Interests}{}{}{
-A versatile professional with a strong foundation in technical problem-solving and a lifelong commitment to creative and collaborative pursuits. I am an adaptable, quick learner who thrives when mastering new technologies and navigating evolving environments. My background includes a deep-seated passion for programming and building technical projects, complemented by the discipline and teamwork skills I have developed as a musician since the age of 14. In my free time, I maintain a highly active and disciplined lifestyle through gym training and surfing, while also enjoying the strategic challenge of chess and writing music. I value social connection and enjoy gaming and spending quality time with family and friends.}
+A versatile professional with a strong foundation in technical problem-solving and a lifelong commitment to creative and collaborative pursuits. I am an adaptable, quick learner who thrives when mastering new technologies and navigating evolving environments. My background includes a deep-seated passion for programming and building technical projects, complemented by the discipline and teamwork skills I have developed as a musician since the age of 14. In my free time, I maintain a highly active and disciplined lifestyle through gym training and surfing, while also enjoying the strategic challenge of chess and writing music. I value social connection, enjoy gaming, and spending quality time with family and friends.}
 
 \sepspace
 
@@ -113,5 +114,6 @@ A versatile professional with a strong foundation in technical problem-solving a
 
 %%% References
 %%% ------------------------------------------------------------
-
+\clearpage
+\includepdf[pages=-]{FAIRCAPE.pdf}
 \end{document}
