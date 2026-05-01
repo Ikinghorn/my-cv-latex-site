@@ -28,11 +28,6 @@ jobs:
           root_file: main.tex
           args: "-pdf -interaction=nonstopmode"
 
-      # Rename output for cleaner URL (optional but recommended)
-      - name: Rename PDF output
-        run: |
-          mv main.pdf cv.pdf
-
       # Create simple landing page that opens PDF directly
       - name: Create Web Redirect
         run: |
