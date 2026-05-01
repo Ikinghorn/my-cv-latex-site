@@ -1,5 +1,9 @@
-name: Deploy LaTeX Site
-on: [push]
+name: Deploy LaTeX CV to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main   # change if you're using a different branch
 
 permissions:
   contents: read
@@ -9,6 +13,11 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    # Optional: pre-empt Node 24 migration warning
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -16,17 +25,43 @@ jobs:
       - name: Compile LaTeX
         uses: xu-cheng/latex-action@v3
         with:
-          root_file: main.tex  # Ensure this matches your filename!
-          # Using 'latexmk' is standard and reliable
+          root_file: main.tex
           args: "-pdf -interaction=nonstopmode"
 
-      - name: Create Web Redirect
-        run: echo '<meta http-equiv="refresh" content="0; url=main.pdf">' > index.html
+      # Rename output for cleaner URL (optional but recommended)
+      - name: Rename PDF output
+        run: |
+          mv main.pdf cv.pdf
 
+      # Create simple landing page that opens PDF directly
+      - name: Create Web Redirect
+        run: |
+          echo '<!doctype html>
+          <html>
+            <head>
+              <meta charset="utf-8">
+              <meta http-equiv="refresh" content="0; url=cv.pdf">
+              <title>CV</title>
+            </head>
+            <body>
+              <p>Redirecting to CV... <a href="cv.pdf">Click here</a></p>
+            </body>
+          </html>' > index.html
+
+      # Upload site content (PDF + index.html)
       - name: Upload Website Files
         uses: actions/upload-pages-artifact@v3
         with:
           path: '.'
 
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    permissions:
+      pages: write
+      id-token: write
+
+    steps:
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
