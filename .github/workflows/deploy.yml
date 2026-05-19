@@ -14,6 +14,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v5
@@ -24,11 +27,11 @@ jobs:
           root_file: main.tex
           args: "-pdf -interaction=nonstopmode"
 
-      # Rename generated PDF to cv.pdf
+      # Rename generated PDF
       - name: Rename PDF
         run: mv main.pdf cv.pdf
 
-      # Create simple landing page that opens PDF directly
+      # Create redirect page
       - name: Create Web Redirect
         run: |
           echo '<!doctype html>
@@ -43,7 +46,7 @@ jobs:
             </body>
           </html>' > index.html
 
-      # Upload site content
+      # Upload website files
       - name: Upload Website Files
         uses: actions/upload-pages-artifact@v4
         with:
