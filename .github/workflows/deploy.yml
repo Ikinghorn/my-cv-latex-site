@@ -3,7 +3,7 @@ name: Deploy LaTeX CV to GitHub Pages
 on:
   push:
     branches:
-      - main   # change if you're using a different branch
+      - main
 
 permissions:
   contents: read
@@ -14,19 +14,19 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    # Optional: pre-empt Node 24 migration warning
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Compile LaTeX
         uses: xu-cheng/latex-action@v3
         with:
           root_file: main.tex
           args: "-pdf -interaction=nonstopmode"
+
+      # Rename generated PDF to cv.pdf
+      - name: Rename PDF
+        run: mv main.pdf cv.pdf
 
       # Create simple landing page that opens PDF directly
       - name: Create Web Redirect
@@ -43,9 +43,9 @@ jobs:
             </body>
           </html>' > index.html
 
-      # Upload site content (PDF + index.html)
+      # Upload site content
       - name: Upload Website Files
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: '.'
 
